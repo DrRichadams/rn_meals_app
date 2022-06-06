@@ -1,8 +1,16 @@
-import { StatusBar } from 'expo-status-bar'; 
+// import { StatusBar } from 'expo-status-bar'; 
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from 'react-native';
 import * as Font from "expo-font"
 import AppLoading from 'expo-app-loading';
+import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import CategoriesScreen from './screens/CartegoriesScreen';
+import CartegoryMealsScreen from './screens/CartegoryMealsScreen';
+import MealDetailScreen from "./screens/MealDetailScreen";
+
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -25,11 +33,16 @@ export default function App() {
     )
   }
 
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <Text style={{  fontFamily: "open-sans"}}>Passion led us here</Text>
-      <StatusBar style="auto" />
-    </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+            <Stack.Screen name="Cartegories" component={CategoriesScreen} />
+            <Stack.Screen name="CartegoryMeal" component={CartegoryMealsScreen} />
+            <Stack.Screen name="MealDetail" component={MealDetailScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
 
